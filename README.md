@@ -14,7 +14,8 @@ The main reason I made AlvaTracker is to easily manage my many social media acco
 
 ## Screenshots
 
-*(To upload screenshots: Simply drag and drop your images into the GitHub editor while editing this README, and GitHub will automatically generate the links for you!)*
+<img width="960" height="496" alt="image" src="https://github.com/user-attachments/assets/7f26de53-9263-46f2-9ac3-d3078b908c8b" />
 
-<!-- You can place your screenshots below this line -->
-![AlvaTracker Daily View](https://via.placeholder.com/800x450.png?text=Drag+and+Drop+Screenshot+Here)
+<img width="960" height="502" alt="image" src="https://github.com/user-attachments/assets/f6893470-a84f-498e-a3e7-92e090bd8000" />
+
+
