@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Horizon - Offline To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header" style="justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <i class='bx bx-check-double'></i>
+                    <h1 class="sidebar-title">Horizon</h1>
+                </div>
+                <button class="icon-btn" onclick="toggleSidebar()"><i class='bx bx-menu'></i></button>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-view="daily">
+                    <i class='bx bx-calendar-event'></i>
+                    <span class="nav-item-text">Daily Tasks</span>
+                </button>
+                <button class="nav-item" data-view="normal">
+                    <i class='bx bx-list-ul'></i>
+                    <span class="nav-item-text">Normal Tasks</span>
+                </button>
+                <button class="nav-item" data-view="heatmap">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="nav-item-text">Activity</span>
+                </button>
+                <button class="nav-item" data-view="content">
+                    <i class='bx bx-spreadsheet'></i>
+                    <span class="nav-item-text">Content Tracker</span>
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="progress-widget circular">
+                    <div class="circular-progress" id="overall-progress-circle">
+                        <div class="inner-circle">
+                            <span id="overall-progress-text">0%</span>
+                        </div>
+                    </div>
+                    <div class="progress-label">Today's Progress</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Daily Tasks View -->
+            <section id="view-daily" class="view-section active">
+                <header class="view-header">
+                    <h2>Daily Tasks</h2>
+                </header>
+                <div class="add-task-container">
+                    <input type="text" id="daily-task-input" placeholder="Add a new daily task..." autocomplete="off">
+                    <button class="btn-primary" id="add-daily-task-btn"><i class='bx bx-plus'></i> Add</button>
+                </div>
+                <div class="task-list" id="daily-task-list">
+                    <!-- Tasks injected here by JS -->
+                </div>
+            </section>
+
+            <!-- Normal Tasks View -->
+            <section id="view-normal" class="view-section">
+                <header class="view-header">
+                    <h2>Normal Tasks</h2>
+                </header>
+                <div class="add-task-container">
+                    <input type="text" id="normal-task-input" placeholder="Add a new regular task..." autocomplete="off">
+                    <button class="btn-primary" id="add-normal-task-btn"><i class='bx bx-plus'></i> Add</button>
+                </div>
+                <div class="task-list" id="normal-task-list">
+                    <!-- Tasks injected here by JS -->
+                </div>
+            </section>
+
+            <!-- Heatmap View -->
+            <section id="view-heatmap" class="view-section">
+                <header class="view-header">
+                    <h2>Activity Heatmap</h2>
+                </header>
+                <div class="heatmap-container">
+                    <div class="month-header">
+                        <button id="prev-month-btn" class="icon-btn"><i class='bx bx-chevron-left'></i></button>
+                        <h3 id="current-month-label">Month Year</h3>
+                        <button id="next-month-btn" class="icon-btn"><i class='bx bx-chevron-right'></i></button>
+                    </div>
+                    <div class="weekdays-grid">
+                        <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                    </div>
+                    <div class="heatmap-grid" id="heatmap-grid">
+                        <!-- Heatmap cells injected here by JS -->
+                    </div>
+                    <div class="heatmap-legend">
+                        <span>Less</span>
+                        <div class="legend-scale">
+                            <div class="legend-cell" style="background-color: var(--cal-bg);"></div>
+                            <div class="legend-cell" style="background-color: var(--green-200);"></div>
+                            <div class="legend-cell" style="background-color: var(--green-400);"></div>
+                            <div class="legend-cell" style="background-color: var(--green-600);"></div>
+                            <div class="legend-cell" style="background-color: var(--green-800);"></div>
+                        </div>
+                        <span>More</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Content Tracking View -->
+            <section id="view-content" class="view-section" style="max-width: 95%; padding: 40px 20px;">
+                <header class="view-header" style="display:flex; justify-content:space-between; align-items:flex-start;">
+                    <div>
+                        <h2>Content Tracker</h2>
+                        <p class="subtitle" style="color:var(--text-muted); font-size:14px; margin-top:8px;">
+                            Track your daily post counts. Missing past days will highlight in red.
+                        </p>
+                    </div>
+                    <div style="display:flex; gap:12px; align-items:center;">
+                        <div class="month-header" style="margin-bottom:0; font-size:14px;">
+                            <button class="icon-btn" onclick="changeContentMonth(-1)"><i class='bx bx-chevron-left'></i></button>
+                            <span id="content-month-label" style="font-weight:600; min-width:100px; text-align:center;">Month</span>
+                            <button class="icon-btn" onclick="changeContentMonth(1)"><i class='bx bx-chevron-right'></i></button>
+                        </div>
+                    </div>
+                </header>
+                <div class="add-task-container" style="margin-bottom: 20px;">
+                    <input type="text" id="content-account-input" placeholder="Add a new account..." autocomplete="off" onkeypress="if(event.key === 'Enter') addContentAccount()">
+                    <button class="btn-primary" id="add-content-account-btn" onclick="addContentAccount()"><i class='bx bx-plus'></i> Add</button>
+                </div>
+                <div class="content-tracker-container" id="content-tracker-grid">
+                    <!-- Javascript will generate the grid here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js?v=7"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js')
+            .then(() => console.log('Service Worker Registered'));
+        }
+    </script>
+</body>
+</html>
