@@ -356,6 +356,12 @@ const updateProgress = () => {
     const circle = document.getElementById('overall-progress-circle');
     circle.style.background = `conic-gradient(var(--primary) ${percentage * 3.6}deg, var(--bg-dark) 0deg)`;
 
+    // Update minimal UI attribute
+    const widget = document.querySelector('.progress-widget');
+    if (widget) {
+        widget.setAttribute('data-progress', `${percentage}%`);
+    }
+
     // Update Heatmap Data for Today
     const today = getTodayStr();
     state.heatmap[today] = percentage;

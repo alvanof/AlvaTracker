@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Horizon - Offline To-Do List</title>
+    <title>AlvaTracker - Offline To-Do List</title>
     <link rel="stylesheet" href="style.css">
     <!-- Google Fonts for modern typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,9 +18,9 @@
         <!-- Sidebar Navigation -->
         <aside class="sidebar">
             <div class="sidebar-header" style="justify-content: space-between;">
-                <div style="display: flex; align-items: center; gap: 8px;">
+                <div class="sidebar-logo-container">
                     <i class='bx bx-check-double'></i>
-                    <h1 class="sidebar-title">Horizon</h1>
+                    <h1 class="sidebar-title">AlvaTracker</h1>
                 </div>
                 <button class="icon-btn" onclick="toggleSidebar()"><i class='bx bx-menu'></i></button>
             </div>
@@ -144,7 +144,7 @@
         </main>
     </div>
 
-    <script src="app.js?v=7"></script>
+    <script src="app.js?v=9"></script>
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./sw.js')

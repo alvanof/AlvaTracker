@@ -65,9 +65,15 @@ body {
 }
 
 .sidebar.collapsed .sidebar-title,
+.sidebar.collapsed .sidebar-logo-container,
 .sidebar.collapsed .nav-item-text,
 .sidebar.collapsed .progress-label {
     display: none;
+}
+
+.sidebar.collapsed .sidebar-header {
+    justify-content: center !important;
+    padding: 24px 0;
 }
 
 .sidebar.collapsed .nav-item {
@@ -79,9 +85,35 @@ body {
     margin: 0;
 }
 
+.sidebar.collapsed .circular-progress {
+    display: none;
+}
+
 .sidebar.collapsed .progress-widget {
-    transform: scale(0.8);
-    margin-left: -12px;
+    padding: 12px 0;
+    background: transparent;
+    transform: none;
+    margin: 0;
+    width: 100%;
+}
+
+.sidebar.collapsed .progress-widget::after {
+    content: attr(data-progress);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--primary);
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-weight: 700;
+    margin: 0 auto;
+}
+
+.sidebar.collapsed .sidebar-footer {
+    padding: 24px 0;
 }
 
 .sidebar-header {
@@ -90,6 +122,12 @@ body {
     align-items: center;
     gap: 12px;
     border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .sidebar-header i {
