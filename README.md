@@ -11,3 +11,10 @@ The main reason I made AlvaTracker is to easily manage my many social media acco
 - **Content Tracking Spreadsheet:** A specialized, dynamic grid to log precisely when and where content is posted across different accounts. Missed days automatically light up in red so you never fall off schedule.
 - **Activity Heatmap:** A visual GitHub-style contribution calendar mapping out your daily completion percentages.
 - **Lightning Fast & Offline:** Driven purely by native browser data storage. No accounts, no loading screens, and 100% capable of running without an internet connection.
+
+## Screenshots
+
+*(To upload screenshots: Simply drag and drop your images into the GitHub editor while editing this README, and GitHub will automatically generate the links for you!)*
+
+<!-- You can place your screenshots below this line -->
+![AlvaTracker Daily View](https://via.placeholder.com/800x450.png?text=Drag+and+Drop+Screenshot+Here)
