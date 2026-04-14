@@ -8,7 +8,7 @@
     "theme_color": "#0f1115",
     "icons": [
         {
-            "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBmMTExNSIvPjx0ZXh0IHk9IjUwJSIgeD0iNTAlIiBkeT0iLjM1ZW0iIGFsaWdubWVudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjkwIiBmaWxsPSIjMTBiOTgxIj7ijJM8L3RleHQ+PC9zdmc+",
+            "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBmMTExNSIvPjx0ZXh0IHk9IjUwJSIgeD0iNTAlIiBkeT0iLjM1ZW0iIGFsaWdubWVudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjkwIiBmaWxsPSIjM2I4MmY2Ij7ijJM8L3RleHQ+PC9zdmc+",
             "sizes": "512x512",
             "type": "image/svg+xml"
         }
