@@ -1,23 +1,23 @@
 :root {
-    /* Color Palette */
-    --bg-dark: #0f1115;
-    --bg-panel: #16191f;
-    --bg-hover: #1e222a;
-    --border-color: #2b303b;
+    /* Color Palette (Telegram Night Theme) */
+    --bg-dark: #0e1621;
+    --bg-panel: #17212b;
+    --bg-hover: #242f3d;
+    --border-color: #0e1621;
     
-    --text-main: #e2e8f0;
-    --text-muted: #94a3b8;
+    --text-main: #ffffff;
+    --text-muted: #7f91a4;
     
     /* Green heatmap & completion colors */
-    --green-200: #064e3b;
-    --green-400: #059669;
-    --green-600: #10b981;
-    --green-800: #34d399;
-    --cal-bg: #1e222a;
+    --green-200: #1b382d;
+    --green-400: #296041;
+    --green-600: #3f8f5e;
+    --green-800: #5cb878;
+    --cal-bg: #17212b;
 
-    --primary: #3b82f6;
-    --primary-hover: #2563eb;
-    --danger: #ef4444;
+    --primary: #5288c1;
+    --primary-hover: #3e73a9;
+    --danger: #e53935;
 
     --radius-md: 8px;
     --radius-lg: 12px;
@@ -104,7 +104,7 @@ body {
     align-items: center;
     width: 44px;
     height: 44px;
-    background-color: rgba(59, 130, 246, 0.1);
+    background-color: rgba(82, 136, 193, 0.1);
     color: var(--primary);
     border-radius: var(--radius-md);
     font-size: 13px;
@@ -176,7 +176,7 @@ body {
 }
 
 .nav-item.active {
-    background-color: rgba(59, 130, 246, 0.1);
+    background-color: rgba(82, 136, 193, 0.1);
     color: var(--primary);
 }
 
@@ -296,7 +296,7 @@ input[type="text"] {
 input[type="text"]:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 0 2px rgba(82, 136, 193, 0.1);
 }
 
 .btn-primary {
@@ -373,7 +373,7 @@ input[type="text"]:focus {
 }
 
 .task-card.completed {
-    border-color: rgba(59, 130, 246, 0.3);
+    border-color: rgba(82, 136, 193, 0.3);
     opacity: 0.8;
 }
 
@@ -451,7 +451,7 @@ input[type="text"]:focus {
     font-size: 10px;
     padding: 2px 6px;
     border-radius: 4px;
-    background-color: rgba(59, 130, 246, 0.1);
+    background-color: rgba(82, 136, 193, 0.1);
     color: var(--primary);
     text-transform: uppercase;
     font-weight: 600;
@@ -817,7 +817,7 @@ input[type="text"]:focus {
 }
 
 .ct-account-row {
-    background-color: rgba(16, 185, 129, 0.05) !important;
+    background-color: rgba(57, 156, 88, 0.05) !important;
 }
 
 .ct-account-row .ct-header-col {
@@ -891,14 +891,14 @@ input[type="text"]:focus {
 }
 
 .platform-btn.active {
-    background-color: rgba(59, 130, 246, 0.1);
+    background-color: rgba(82, 136, 193, 0.1);
     border-color: var(--primary);
     color: var(--primary);
 }
 
 /* Highlight behaviors */
 .ct-today-col {
-    background-color: rgba(59, 130, 246, 0.1) !important;
+    background-color: rgba(82, 136, 193, 0.1) !important;
 }
 .ct-date-row .ct-today-col {
     background-color: var(--primary) !important;
@@ -913,9 +913,11 @@ input[type="text"]:focus {
 }
 
 .ct-has-post {
-    background-color: rgba(16, 185, 129, 0.5) !important;
+    background-color: rgba(57, 156, 88, 0.5) !important;
 }
 .ct-has-post input {
     color: #fff !important;
     font-weight: 600;
 }
+
+
