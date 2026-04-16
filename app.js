@@ -528,9 +528,16 @@ const renderHeatmap = () => {
 
 // Content Tracker Logic
 let currentContentDate = new Date();
+let activeContentCol = null;
+
+const toggleContentColumn = (dayIndex) => {
+    activeContentCol = activeContentCol === dayIndex ? null : dayIndex;
+    renderContentGrid();
+};
 
 const changeContentMonth = (offset) => {
     currentContentDate.setMonth(currentContentDate.getMonth() + offset);
+    activeContentCol = null;
     renderContentGrid();
 };
 
@@ -678,7 +685,8 @@ const renderContentGrid = () => {
     for (let i = 1; i <= daysInMonth; i++) {
         const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
         const isToday = dateStr === realTodayStr;
-        headerHTML += `<div class="ct-cell ${isToday ? 'ct-today-col' : ''}">${i}</div>`;
+        const isHighlighted = activeContentCol === i;
+        headerHTML += `<div class="ct-cell ${isToday ? 'ct-today-col' : ''} ${isHighlighted ? 'ct-col-highlight' : ''}" style="cursor: pointer;" onclick="toggleContentColumn(${i})" title="Click to highlight column">${i}</div>`;
     }
     headerHTML += `</div>`;
     
@@ -753,9 +761,10 @@ const renderContentGrid = () => {
                         // Check empty and past
                         const isMissing = (recordValue === '') && isDatePastOrToday(dateStr);
                         const hasPost = recordValue !== '' && !isNaN(recordValue) && Number(recordValue) > 0;
+                        const isHighlighted = activeContentCol === i;
                         
                         platformRowHTML += `
-                            <div class="ct-cell ${isToday ? 'ct-today-col' : ''} ${isMissing ? 'ct-missing-post' : ''} ${hasPost ? 'ct-has-post' : ''}">
+                            <div class="ct-cell ${isToday ? 'ct-today-col' : ''} ${isMissing ? 'ct-missing-post' : ''} ${hasPost ? 'ct-has-post' : ''} ${isHighlighted ? 'ct-col-highlight' : ''}">
                                 <input type="text" value="${recordValue}" 
                                     onchange="updateContentRecord('${account.id}', '${platform.id}', '${dateStr}', this.value)">
                             </div>
@@ -783,6 +792,7 @@ window.togglePlatformTray = togglePlatformTray;
 window.toggleContentPlatform = toggleContentPlatform;
 window.deleteContentPlatform = deleteContentPlatform;
 window.updateContentRecord = updateContentRecord;
+window.toggleContentColumn = toggleContentColumn;
 
 // Expose functions to window
 window.deleteMainTask = deleteMainTask;
