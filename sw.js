@@ -1,4 +1,4 @@
-const CACHE_NAME = 'horizon-v1';
+const CACHE_NAME = 'alvatracker-v2';
 const ASSETS = [
     './',
     './index.html',
@@ -18,5 +18,17 @@ self.addEventListener('install', (e) => {
 self.addEventListener('fetch', (e) => {
     e.respondWith(
         caches.match(e.request).then((response) => response || fetch(e.request))
+    );
+});
+
+self.addEventListener('activate', (e) => {
+    e.waitUntil(
+        caches.keys().then((keyList) => {
+            return Promise.all(keyList.map((key) => {
+                if (key !== CACHE_NAME) {
+                    return caches.delete(key);
+                }
+            }));
+        })
     );
 });
