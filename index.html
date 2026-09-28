@@ -1,167 +1,182 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlvaTracker</title>
+    <meta name="description" content="AlvaTracker — Lacak tugas harian, aktivitas, dan konten media sosial kamu.">
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts for modern typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Icons -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBlMTYyMSIvPjx0ZXh0IHk9IjUwJSIgeD0iNTAlIiBkeT0iLjM1ZW0iIGFsaWdubWVudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjkwIiBmaWxsPSIjNTI4OGMxIj7ijJM8L3RleHQ+PC9zdmc+">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBhMGEwYSIvPjx0ZXh0IHk9IjUwJSIgeD0iNTAlIiBkeT0iLjM1ZW0iIGFsaWdubWVudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjkwIiBmaWxsPSIjN2M2YWY3Ij7ijJM8L3RleHQ+PC9zdmc+">
     <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
     <div class="app-container">
-        <!-- Sidebar Navigation -->
+
+        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-header" style="justify-content: space-between;">
                 <div class="sidebar-logo-container">
                     <i class='bx bx-check-double'></i>
                     <h1 class="sidebar-title">AlvaTracker</h1>
                 </div>
-                <button class="icon-btn" onclick="toggleSidebar()"><i class='bx bx-menu'></i></button>
+                <button class="icon-btn" onclick="toggleSidebar()" title="Toggle sidebar">
+                    <i class='bx bx-menu'></i>
+                </button>
             </div>
+
             <nav class="sidebar-nav">
-                <button class="nav-item active" data-view="daily">
+                <button class="nav-item active" data-view="daily" id="nav-daily">
                     <i class='bx bx-calendar-event'></i>
-                    <span class="nav-item-text">Daily Tasks</span>
+                    <span class="nav-item-text">Tugas Harian</span>
                 </button>
-                <button class="nav-item" data-view="normal">
+                <button class="nav-item" data-view="normal" id="nav-normal">
                     <i class='bx bx-list-ul'></i>
-                    <span class="nav-item-text">Normal Tasks</span>
+                    <span class="nav-item-text">Tugas Biasa</span>
                 </button>
-                <button class="nav-item" data-view="heatmap">
+                <button class="nav-item" data-view="heatmap" id="nav-heatmap">
                     <i class='bx bx-grid-alt'></i>
-                    <span class="nav-item-text">Activity</span>
+                    <span class="nav-item-text">Aktivitas</span>
                 </button>
-                <button class="nav-item" data-view="content">
+                <button class="nav-item" data-view="content" id="nav-content">
                     <i class='bx bx-spreadsheet'></i>
-                    <span class="nav-item-text">Content Tracker</span>
+                    <span class="nav-item-text">Tracker Konten</span>
                 </button>
             </nav>
+
             <div class="sidebar-footer">
-                <div class="progress-widget circular">
+                <div class="progress-widget circular" data-progress="0%">
                     <div class="circular-progress" id="overall-progress-circle">
                         <div class="inner-circle">
                             <span id="overall-progress-text">0%</span>
                         </div>
                     </div>
-                    <div class="progress-label">Today's Progress</div>
+                    <div class="progress-label">Progress Hari Ini</div>
                 </div>
             </div>
         </aside>
 
-        <!-- Main Content Area -->
+        <!-- Main Content -->
         <main class="main-content">
 
-            <!-- Daily Tasks View -->
+            <!-- ── Tugas Harian ── -->
             <section id="view-daily" class="view-section active">
                 <header class="view-header">
-                    <h2>Daily Tasks</h2>
+                    <h2>Tugas Harian</h2>
+                    <p class="subtitle">Tugas berulang setiap hari. Centang subtask untuk mencatat progres.</p>
                 </header>
+                <!-- Data bar -->
+                <div class="data-bar">
+                    <button class="btn-ghost" id="btn-export" title="Ekspor semua data ke file JSON">
+                        <i class='bx bx-export'></i> Ekspor Data
+                    </button>
+                    <button class="btn-ghost" id="btn-import" title="Impor data dari file JSON">
+                        <i class='bx bx-import'></i> Impor Data
+                    </button>
+                    <button class="btn-ghost" id="btn-clear" title="Hapus semua data" style="color:var(--danger)">
+                        <i class='bx bx-trash'></i> Reset
+                    </button>
+                    <span class="save-status saved" id="save-status">
+                        <i class='bx bx-check-circle'></i> Tersimpan
+                    </span>
+                </div>
                 <div class="add-task-container">
-                    <input type="text" id="daily-task-input" placeholder="Add a new daily task..." autocomplete="off">
-                    <button class="btn-primary" id="add-daily-task-btn"><i class='bx bx-plus'></i> Add</button>
+                    <input type="text" id="daily-task-input" placeholder="Tambah tugas harian baru…" autocomplete="off">
+                    <button class="btn-primary" id="add-daily-task-btn">
+                        <i class='bx bx-plus'></i> Tambah
+                    </button>
                 </div>
-                <div class="task-list" id="daily-task-list">
-                    <!-- Tasks injected here by JS -->
-                </div>
+                <div class="task-list" id="daily-task-list"></div>
             </section>
 
-            <!-- Normal Tasks View -->
+            <!-- ── Tugas Biasa ── -->
             <section id="view-normal" class="view-section">
                 <header class="view-header">
-                    <h2>Normal Tasks</h2>
+                    <h2>Tugas Biasa</h2>
+                    <p class="subtitle">Tugas umum yang tidak perlu diulang setiap hari.</p>
                 </header>
                 <div class="add-task-container">
-                    <input type="text" id="normal-task-input" placeholder="Add a new regular task..."
-                        autocomplete="off">
-                    <button class="btn-primary" id="add-normal-task-btn"><i class='bx bx-plus'></i> Add</button>
+                    <input type="text" id="normal-task-input" placeholder="Tambah tugas baru…" autocomplete="off">
+                    <button class="btn-primary" id="add-normal-task-btn">
+                        <i class='bx bx-plus'></i> Tambah
+                    </button>
                 </div>
-                <div class="task-list" id="normal-task-list">
-                    <!-- Tasks injected here by JS -->
-                </div>
+                <div class="task-list" id="normal-task-list"></div>
             </section>
 
-            <!-- Heatmap View -->
+            <!-- ── Aktivitas Heatmap ── -->
             <section id="view-heatmap" class="view-section">
                 <header class="view-header">
-                    <h2>Activity Heatmap</h2>
+                    <h2>Aktivitas</h2>
+                    <p class="subtitle">Rekap progres harian dalam bentuk heatmap kalender.</p>
                 </header>
                 <div class="heatmap-container">
                     <div class="month-header">
                         <button id="prev-month-btn" class="icon-btn"><i class='bx bx-chevron-left'></i></button>
-                        <h3 id="current-month-label">Month Year</h3>
+                        <h3 id="current-month-label">Bulan Tahun</h3>
                         <button id="next-month-btn" class="icon-btn"><i class='bx bx-chevron-right'></i></button>
                     </div>
                     <div class="weekdays-grid">
-                        <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                        <span>Min</span><span>Sen</span><span>Sel</span><span>Rab</span>
+                        <span>Kam</span><span>Jum</span><span>Sab</span>
                     </div>
-                    <div class="heatmap-grid" id="heatmap-grid">
-                        <!-- Heatmap cells injected here by JS -->
-                    </div>
+                    <div class="heatmap-grid" id="heatmap-grid"></div>
                     <div class="heatmap-legend">
-                        <span>Less</span>
+                        <span>Sedikit</span>
                         <div class="legend-scale">
-                            <div class="legend-cell" style="background-color: var(--cal-bg);"></div>
-                            <div class="legend-cell" style="background-color: var(--green-200);"></div>
-                            <div class="legend-cell" style="background-color: var(--green-400);"></div>
-                            <div class="legend-cell" style="background-color: var(--green-600);"></div>
-                            <div class="legend-cell" style="background-color: var(--green-800);"></div>
+                            <div class="legend-cell" style="background-color:var(--cal-bg);border:1px solid var(--border-color)"></div>
+                            <div class="legend-cell" style="background-color:var(--green-200)"></div>
+                            <div class="legend-cell" style="background-color:var(--green-400)"></div>
+                            <div class="legend-cell" style="background-color:var(--green-600)"></div>
+                            <div class="legend-cell" style="background-color:var(--green-800)"></div>
                         </div>
-                        <span>More</span>
+                        <span>Banyak</span>
                     </div>
                 </div>
             </section>
 
-            <!-- Content Tracking View -->
-            <section id="view-content" class="view-section" style="max-width: 95%; padding: 40px 20px;">
-                <header class="view-header"
-                    style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <!-- ── Tracker Konten ── -->
+            <section id="view-content" class="view-section">
+                <header class="view-header" style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
                     <div>
-                        <h2>Content Tracker</h2>
-                        <p class="subtitle" style="color:var(--text-muted); font-size:14px; margin-top:8px;">
-                            Track your daily post counts. Missing past days will highlight in red.
-                        </p>
+                        <h2>Tracker Konten</h2>
+                        <p class="subtitle">Lacak jumlah postingan harian per platform. Sel merah = belum diisi.</p>
                     </div>
-                    <div style="display:flex; gap:12px; align-items:center;">
-                        <div class="month-header" style="margin-bottom:0; font-size:14px;">
-                            <button class="icon-btn" onclick="changeContentMonth(-1)"><i
-                                    class='bx bx-chevron-left'></i></button>
-                            <span id="content-month-label"
-                                style="font-weight:600; min-width:100px; text-align:center;">Month</span>
-                            <button class="icon-btn" onclick="changeContentMonth(1)"><i
-                                    class='bx bx-chevron-right'></i></button>
-                        </div>
+                    <div class="month-header" style="margin-bottom:0;">
+                        <button class="icon-btn" onclick="changeContentMonth(-1)"><i class='bx bx-chevron-left'></i></button>
+                        <span id="content-month-label" style="font-weight:700; min-width:110px; text-align:center; font-size:14px;">Bulan</span>
+                        <button class="icon-btn" onclick="changeContentMonth(1)"><i class='bx bx-chevron-right'></i></button>
                     </div>
                 </header>
-                <div class="add-task-container" style="margin-bottom: 20px;">
-                    <input type="text" id="content-account-input" placeholder="Add a new account..." autocomplete="off"
-                        onkeypress="if(event.key === 'Enter') addContentAccount()">
-                    <button class="btn-primary" id="add-content-account-btn" onclick="addContentAccount()"><i
-                            class='bx bx-plus'></i> Add</button>
+                <div class="add-task-container" style="margin-bottom:12px;">
+                    <input type="text" id="content-account-input"
+                        placeholder="Nama akun baru (mis: @username_ig)…"
+                        autocomplete="off"
+                        onkeypress="if(event.key==='Enter') addContentAccount()">
+                    <button class="btn-primary" id="add-content-account-btn" onclick="addContentAccount()">
+                        <i class='bx bx-plus'></i> Tambah Akun
+                    </button>
                 </div>
                 <div class="content-tracker-container" id="content-tracker-grid">
-                    <!-- Javascript will generate the grid here -->
+                    <!-- Grid diisi oleh JS -->
                 </div>
             </section>
+
         </main>
     </div>
 
-    <script src="app.js?v=9"></script>
+    <script src="app.js?v=10"></script>
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./sw.js')
-                .then(() => console.log('Service Worker Registered'));
+                .then(() => console.log('Service Worker terdaftar'));
         }
     </script>
 </body>
 
 </html>
-
