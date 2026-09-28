@@ -33,6 +33,8 @@
 
     --ct-has-post-bg:   rgba(34, 197, 94, 0.55);
     --ct-has-post-text: #ffffff;
+    --ct-scheduled-bg:  rgba(59, 130, 246, 0.55);
+    --ct-scheduled-text:#ffffff;
     --ct-missing-bg:    rgba(239, 68, 68, 0.55);
     --ct-missing-text:  #ffffff;
 
@@ -72,6 +74,8 @@
 
     --ct-has-post-bg:   rgba(34, 197, 94, 0.88);
     --ct-has-post-text: #111111;
+    --ct-scheduled-bg:  rgba(59, 130, 246, 0.88);
+    --ct-scheduled-text:#111111;
     --ct-missing-bg:    rgba(239, 68, 68, 0.82);
     --ct-missing-text:  #111111;
 }
@@ -659,6 +663,9 @@ input[type="text"]:focus {
 
 .ct-has-post { background-color: var(--ct-has-post-bg) !important; }
 .ct-has-post input { color: var(--ct-has-post-text) !important; font-weight:700; }
+
+.ct-scheduled-post { background-color: var(--ct-scheduled-bg) !important; }
+.ct-scheduled-post input { color: var(--ct-scheduled-text) !important; font-weight:700; }
 
 .ct-missing-post { background-color: var(--ct-missing-bg) !important; }
 .ct-missing-post input { color: var(--ct-missing-text) !important; }

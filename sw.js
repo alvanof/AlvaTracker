@@ -1,4 +1,4 @@
-const CACHE_NAME = 'alvatracker-v2';
+const CACHE_NAME = 'alvatracker-v3';
 const ASSETS = [
     './',
     './index.html',

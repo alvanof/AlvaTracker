@@ -930,10 +930,14 @@ const updateContentRecord = (accountId, platformId, dateStr, value) => {
     // Lightweight cell update + update total col
     const cell = document.querySelector(`[data-cell="${platformId}-${dateStr}"]`);
     if (cell) {
-        const isMissing = (!value || value === '') && isDatePastOrToday(dateStr);
-        const hasPost   = value !== '' && !isNaN(value) && Number(value) > 0;
+        const isPastOrToday = isDatePastOrToday(dateStr);
+        const hasValue  = value !== '' && !isNaN(value) && Number(value) > 0;
+        const isMissing = (!value || value === '') && isPastOrToday;
+        const isCompleted = hasValue && isPastOrToday;
+        const isScheduled = hasValue && !isPastOrToday;
         cell.classList.toggle('ct-missing-post', isMissing);
-        cell.classList.toggle('ct-has-post', hasPost);
+        cell.classList.toggle('ct-has-post', isCompleted);
+        cell.classList.toggle('ct-scheduled-post', isScheduled);
     }
     // Update total column for this platform row
     const totalCell = document.querySelector(`[data-total="${platformId}"]`);
@@ -997,6 +1001,11 @@ const renderContentGrid = () => {
         return;
     }
 
+    let spacerHTML = '';
+    for (let i = 1; i <= daysInMonth; i++) {
+        spacerHTML += `<div class="ct-cell" style="border:none;pointer-events:none;"></div>`;
+    }
+
     state.contentAccounts.forEach(account => {
         container.innerHTML += `
             <div class="ct-row ct-account-row">
@@ -1018,7 +1027,7 @@ const renderContentGrid = () => {
                         </button>
                     </div>
                 </div>
-                <div class="ct-account-spacer"></div>
+                ${spacerHTML}
                 <div class="ct-total-col header-total" style="background:var(--bg-hover);">—</div>
             </div>
         `;
@@ -1032,6 +1041,7 @@ const renderContentGrid = () => {
                                 <i class='bx bx-plus' style="font-size:12px;"></i> Tambah platform…
                             </span>
                         </div>
+                        ${spacerHTML}
                         <div class="ct-total-col">—</div>
                     </div>
                 `;
@@ -1054,11 +1064,14 @@ const renderContentGrid = () => {
                     const dateStr   = `${year}-${String(month+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
                     const isToday   = dateStr === realTodayStr;
                     const val       = platform.records[dateStr] || '';
-                    const isMissing = (val === '') && isDatePastOrToday(dateStr);
-                    const hasPost   = val !== '' && !isNaN(val) && Number(val) > 0;
+                    const isPastOrToday = isDatePastOrToday(dateStr);
+                    const hasValue  = val !== '' && !isNaN(val) && Number(val) > 0;
+                    const isMissing = (val === '') && isPastOrToday;
+                    const isCompleted = hasValue && isPastOrToday;
+                    const isScheduled = hasValue && !isPastOrToday;
                     const isHL      = activeContentCol === i;
                     rowHTML += `
-                        <div class="ct-cell ${isToday?'ct-today-col':''} ${isMissing?'ct-missing-post':''} ${hasPost?'ct-has-post':''} ${isHL?'ct-col-highlight':''}"
+                        <div class="ct-cell ${isToday?'ct-today-col':''} ${isMissing?'ct-missing-post':''} ${isCompleted?'ct-has-post':''} ${isScheduled?'ct-scheduled-post':''} ${isHL?'ct-col-highlight':''}"
                              data-cell="${platform.id}-${dateStr}">
                             <input type="text" value="${val}"
                                 onchange="updateContentRecord('${account.id}','${platform.id}','${dateStr}',this.value)"
